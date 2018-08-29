@@ -408,7 +408,7 @@
                     "dockerStrategy": {
                         "from": {
                             "kind": "ImageStreamTag",
-                            "name": "${APPLICATION_NAME}-base:latest"
+                            "name": "${APPLICATION_NAME}-app-base:latest"
                         }
                     }
                 },

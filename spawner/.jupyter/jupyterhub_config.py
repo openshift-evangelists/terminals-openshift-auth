@@ -121,7 +121,7 @@ c.KubeSpawner.init_containers = [
         'name': 'setup-volume',
         'image': '%s' % c.KubeSpawner.singleuser_image_spec,
         'command': [
-            '/opt/butterfly/bin/setup-volume.sh',
+            '/opt/terminal/bin/setup-volume.sh',
             '/opt/app-root',
             '/mnt/workspace'
         ],

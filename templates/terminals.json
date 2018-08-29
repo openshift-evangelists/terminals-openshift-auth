@@ -159,7 +159,7 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/GrahamDumpleton/workshop-terminals.git"
+                        "uri": "https://github.com/openshift-evangelists/terminals-openshift-auth.git"
                     },
                     "contextDir": "spawner"
                 },

@@ -91,6 +91,8 @@ c.OpenShiftOAuthenticator.oauth_callback_url = (
 
 c.Authenticator.auto_login = True
 
+c.Authenticator.admin_users = set(os.environ.get('ADMIN_USERS', '').split())
+
 # Override URL prefix for application and copy files to volume.
 
 c.KubeSpawner.user_storage_pvc_ensure = True

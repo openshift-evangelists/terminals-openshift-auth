@@ -241,16 +241,20 @@
                                         "value": "${APPLICATION_NAME}"
                                     },
                                     {
-                                        "name": "IDLE_TIMEOUT",
-                                        "value": "${IDLE_TIMEOUT}"
-                                    },
-                                    {
                                         "name": "WORKSPACE_MEMORY_SIZE",
                                         "value": "${WORKSPACE_MEMORY_SIZE}"
                                     },
                                     {
                                         "name": "WORKSPACE_VOLUME_SIZE",
                                         "value": "${WORKSPACE_VOLUME_SIZE}"
+                                    },
+                                    {
+                                        "name": "ADMIN_USERS",
+                                        "value": "${ADMIN_USERS}"
+                                    },
+                                    {
+                                        "name": "IDLE_TIMEOUT",
+                                        "value": "${IDLE_TIMEOUT}"
                                     }
                                 ]
                             }

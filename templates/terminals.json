@@ -256,13 +256,44 @@
                                         "name": "IDLE_TIMEOUT",
                                         "value": "${IDLE_TIMEOUT}"
                                     }
-                                ]
+                                ],
+				"volumeMounts": [
+				    {
+					"mountPath": "/opt/app-root/data",
+					"name": "data"
+				    }
+				]
                             }
-                        ]
+                        ],
+			"volumes": [
+			    {
+				"name": "data",
+				"persistentVolumeClaim": {
+				    "claimName": "${APPLICATION_NAME}-hub-data"
+				}
+			    }
+			]
                     }
                 }
             }
         },
+	{
+	    "apiVersion": "v1",
+	    "kind": "PersistentVolumeClaim",
+	    "metadata": {
+		"name": "${APPLICATION_NAME}-hub-data"
+	    },
+	    "spec": {
+		"accessModes": [
+		    "ReadWriteOnce"
+		],
+		"resources": {
+		    "requests": {
+			"storage": "1Gi"
+		    }
+		}
+	    }
+	},
         {
             "kind": "Service",
             "apiVersion": "v1",

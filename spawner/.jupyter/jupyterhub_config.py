@@ -89,6 +89,8 @@ if not host:
 c.OpenShiftOAuthenticator.oauth_callback_url = (
         'https://%s/hub/oauth_callback' % host)
 
+c.Authenticator.auto_login = True
+
 # Override URL prefix for application and copy files to volume.
 
 c.KubeSpawner.user_storage_pvc_ensure = True

@@ -1,0 +1,10 @@
+# /opt/app-root/etc/init.d/rc.local
+
+set -x
+
+# Commands to run when the container first starts. The script must exit as
+# supervisord will only be run once this script exists. Can be used to run
+# commands such as login user using 'oc', create a project for the user or
+# switch to users project.
+
+# ...

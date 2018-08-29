@@ -2,6 +2,8 @@
 
 set -x
 
+set -eo pipefail
+
 # Copy files to working directory.
 
 shopt -u dotglob

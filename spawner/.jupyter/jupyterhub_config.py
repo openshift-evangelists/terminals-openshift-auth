@@ -21,7 +21,7 @@ c.KubeSpawner.singleuser_image_spec = (
         'docker-registry.default.svc:5000/%s/%s-app-term' %
         (namespace, application_name))
 
-c.KubeSpawner.cmd = ['/usr/libexec/run']
+c.KubeSpawner.cmd = ['/usr/libexec/s2i/run']
 
 c.KubeSpawner.pod_name_template = '%s-user-{username}' % (
         c.KubeSpawner.hub_connect_ip)

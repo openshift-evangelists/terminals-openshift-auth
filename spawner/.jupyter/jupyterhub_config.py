@@ -3,6 +3,8 @@ import os
 import json
 import requests
 
+c.JupyterHub.logo_file = '/opt/app-root/src/images/OpenShiftBanner.png'
+
 # Override image details with that for the terminal. We need to use a
 # fiddle at the moment and use the internal registry address for where
 # the image policy plugin isn't configured for the cluster.

@@ -38,6 +38,11 @@
         {
             "name": "IDLE_TIMEOUT",
             "value": "7200"
+        },
+        {
+            "name": "OC_VERSION",
+            "value": "3.10.41",
+            "required": true
         }
     ],
     "objects": [
@@ -392,7 +397,13 @@
                         "from": {
                             "kind": "DockerImage",
                             "name": "centos/s2i-base-centos7:latest"
-                        }
+                        },
+                        "buildArgs": [
+                            {
+                                "name": "OC_VERSION",
+                                "value": "${OC_VERSION}"
+                            }
+                        ]
                     }
                 },
                 "output": {

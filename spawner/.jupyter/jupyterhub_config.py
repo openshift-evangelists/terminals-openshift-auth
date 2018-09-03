@@ -143,9 +143,7 @@ c.KubeSpawner.init_containers = [
 ]
 
 def modify_pod_hook(spawner, pod):
-    pod.spec.containers[0].env.append(dict(name='URI_ROOT_PATH',
-            value='/user/%s/' % spawner.user.name))
-    pod.spec.containers[0].env.append(dict(name='OPENSHIFT_USER',
+    pod.spec.containers[0].env.append(dict(name='JUPYTERHUB_USER',
             value='%s' % spawner.user.name))
 
     return pod

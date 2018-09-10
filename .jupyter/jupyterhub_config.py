@@ -20,7 +20,7 @@ with open(os.path.join(service_account_path, 'namespace')) as fp:
 c.KubeSpawner.hub_connect_ip = application_name
 
 c.KubeSpawner.singleuser_image_spec = (
-        'docker-registry.default.svc:5000/%s/%s-app-labs' %
+        'docker-registry.default.svc:5000/%s/%s-app-labs:latest' %
         (namespace, application_name))
 
 c.KubeSpawner.cmd = ['/usr/libexec/s2i/run']

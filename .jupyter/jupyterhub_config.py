@@ -20,7 +20,7 @@ with open(os.path.join(service_account_path, 'namespace')) as fp:
 c.KubeSpawner.hub_connect_ip = application_name
 
 c.KubeSpawner.singleuser_image_spec = (
-        'docker-registry.default.svc:5000/%s/%s-app-term' %
+        'docker-registry.default.svc:5000/%s/%s-app-labs' %
         (namespace, application_name))
 
 c.KubeSpawner.cmd = ['/usr/libexec/s2i/run']
@@ -30,7 +30,7 @@ c.KubeSpawner.pod_name_template = '%s-user-{username}' % (
 
 c.KubeSpawner.common_labels = { 'app': application_name }
 
-c.Spawner.mem_limit = convert_size_to_bytes(os.environ['WORKSPACE_MEMORY_SIZE'])
+c.Spawner.mem_limit = convert_size_to_bytes(os.environ['MEMORY_SIZE'])
 
 # Work out the public server address for the OpenShift REST API. Don't
 # know how to get this via the REST API client so do a raw request to
@@ -103,7 +103,7 @@ c.KubeSpawner.user_storage_pvc_ensure = True
 
 c.KubeSpawner.pvc_name_template = '%s-user-{username}' % application_name
 
-c.KubeSpawner.user_storage_capacity = os.environ['WORKSPACE_VOLUME_SIZE']
+c.KubeSpawner.user_storage_capacity = os.environ['VOLUME_SIZE']
 
 c.KubeSpawner.user_storage_access_modes = ['ReadWriteOnce']
 
@@ -129,7 +129,7 @@ c.KubeSpawner.init_containers = [
         'name': 'setup-volume',
         'image': '%s' % c.KubeSpawner.singleuser_image_spec,
         'command': [
-            '/opt/terminal/bin/setup-volume.sh',
+            '/opt/workshop/bin/setup-volume.sh',
             '/opt/app-root',
             '/mnt/workspace'
         ],

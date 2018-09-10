@@ -2,32 +2,33 @@
     "kind": "Template",
     "apiVersion": "v1",
     "metadata": {
-        "name": "terminals-openshift-auth",
+        "name": "training-openshift-auth",
         "annotations": {
-            "openshift.io/display-name": "Workshop Terminals"
+            "openshift.io/display-name": "Training"
         }
     },
     "parameters": [
         {
             "name": "APPLICATION_NAME",
-            "value": "terminals",
+            "value": "training",
             "required": true
         },
         {
-            "name": "WORKSPACE_REPOSITORY_URL",
-            "value": "https://github.com/openshift-evangelists/terminals-openshift-auth",
+            "name": "WORKSHOP_URL",
+            "value": "https://github.com/openshift-evangelists/labs-workshop-guide.git",
             "required": true
         },
         {
-            "name": "WORKSPACE_CONTEXT_DIR",
-            "value": "workspace"
+            "name": "PROJECT_ROLE",
+            "value": "view",
+            "required": true
         },
         {
-            "name": "WORKSPACE_MEMORY_SIZE",
-            "value": "1Gi"
+            "name": "MEMORY_SIZE",
+            "value": "512Mi"
         },
         {
-            "name": "WORKSPACE_VOLUME_SIZE",
+            "name": "VOLUME_SIZE",
             "value": "1Gi"
         },
         {
@@ -38,6 +39,11 @@
         {
             "name": "IDLE_TIMEOUT",
             "value": "7200"
+        },
+        {
+            "name": "KUBECTL_VERSION",
+            "value": "1.10.0",
+            "required": true
         },
         {
             "name": "OC_VERSION",
@@ -88,6 +94,9 @@
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "lookupPolicy": {
+                "local": true
             }
         },
         {
@@ -140,6 +149,9 @@
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "lookupPolicy": {
+                "local": true
             }
         },
 
@@ -164,9 +176,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-evangelists/terminals-openshift-auth.git"
-                    },
-                    "contextDir": "spawner"
+                        "uri": "https://github.com/openshift-evangelists/training-openshift-auth.git"
+                    }
                 },
                 "strategy": {
                     "type": "Source",
@@ -246,12 +257,12 @@
                                         "value": "${APPLICATION_NAME}"
                                     },
                                     {
-                                        "name": "WORKSPACE_MEMORY_SIZE",
-                                        "value": "${WORKSPACE_MEMORY_SIZE}"
+                                        "name": "MEMORY_SIZE",
+                                        "value": "${MEMORY_SIZE}"
                                     },
                                     {
-                                        "name": "WORKSPACE_VOLUME_SIZE",
-                                        "value": "${WORKSPACE_VOLUME_SIZE}"
+                                        "name": "VOLUME_SIZE",
+                                        "value": "${VOLUME_SIZE}"
                                     },
                                     {
                                         "name": "ADMIN_USERS",
@@ -336,9 +347,6 @@
                 "name": "${APPLICATION_NAME}",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
-                },
-                "annotations": {
-                    "haproxy.router.openshift.io/hsts_header": "max-age=31536000;includeSubDomains"
                 }
             },
             "spec": {
@@ -352,7 +360,8 @@
                     "targetPort": "8080-tcp"
                 },
                 "tls": {
-                    "termination": "edge"
+                    "termination": "edge",
+                    "insecureEdgeTerminationPolicy": "Redirect"
                 }
             }
         },
@@ -364,6 +373,9 @@
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "lookupPolicy": {
+                "local": true
             }
         },
         {
@@ -387,9 +399,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-evangelists/terminal-base-image.git"
-                    },
-                    "contextDir": "image"
+                        "uri": "https://github.com/openshift-evangelists/workshop-base-image.git"
+                    }
                 },
                 "strategy": {
                     "type": "Docker",
@@ -402,6 +413,10 @@
                             {
                                 "name": "OC_VERSION",
                                 "value": "${OC_VERSION}"
+                            },
+                            {
+                                "name": "KUBECTL_VERSION",
+                                "value": "${KUBECTL_VERSION}"
                             }
                         ]
                     }
@@ -422,6 +437,9 @@
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "lookupPolicy": {
+                "local": true
             }
         },
         {
@@ -445,9 +463,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-evangelists/terminal-lang-image.git"
-                    },
-                    "contextDir": "image"
+                        "uri": "https://github.com/openshift-evangelists/workshop-lang-image.git"
+                    }
                 },
                 "strategy": {
                     "type": "Docker",
@@ -470,17 +487,20 @@
             "kind": "ImageStream",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}-app-term",
+                "name": "${APPLICATION_NAME}-app-labs",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
+            },
+            "lookupPolicy": {
+                "local": true
             }
         },
         {
             "kind": "BuildConfig",
             "apiVersion": "v1",
             "metadata": {
-                "name": "${APPLICATION_NAME}-app-term",
+                "name": "${APPLICATION_NAME}-app-labs",
                 "labels": {
                     "app": "${APPLICATION_NAME}"
                 }
@@ -497,9 +517,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "${WORKSPACE_REPOSITORY_URL}"
-                    },
-                    "contextDir": "${WORKSPACE_CONTEXT_DIR}"
+                        "uri": "${WORKSHOP_URL}"
+                    }
                 },
                 "strategy": {
                     "type": "Source",
@@ -513,7 +532,7 @@
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}-app-term:latest"
+                        "name": "${APPLICATION_NAME}-app-labs:latest"
                     }
                 }
             }

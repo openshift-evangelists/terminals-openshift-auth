@@ -19,11 +19,6 @@
             "required": true
         },
         {
-            "name": "PROJECT_ROLE",
-            "value": "view",
-            "required": true
-        },
-        {
             "name": "MEMORY_SIZE",
             "value": "512Mi"
         },

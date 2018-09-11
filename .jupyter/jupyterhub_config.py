@@ -162,3 +162,34 @@ if idle_timeout and int(idle_timeout):
             'command': ['cull-idle-servers', '--timeout=%s' % idle_timeout],
         }
     ]
+
+
+# Define profiles users can select.
+
+c.KubeSpawner.profile_list = [
+    {
+	'display_name': 'Workshop Environment',
+	'default': True,
+	'kubespawner_override': {
+	    'env': {
+                'DEFAULT_PAGE': 'dashboard'
+	    }
+	}
+    },
+    {
+	'display_name': 'Interactive Terminal Only',
+	'kubespawner_override': {
+	    'env': {
+                'DEFAULT_PAGE': 'terminal'
+	    }
+	}
+    },
+    {
+	'display_name': 'Workshop Content Only',
+	'kubespawner_override': {
+	    'env': {
+                'DEFAULT_PAGE': 'workshop'
+	    }
+	}
+    }
+]

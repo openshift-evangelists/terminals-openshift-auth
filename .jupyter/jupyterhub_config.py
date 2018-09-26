@@ -168,29 +168,29 @@ if idle_timeout and int(idle_timeout):
 
 profile_list = [
     {
-	'display_name': 'Workshop Environment',
-	'default': True,
-	'kubespawner_override': {
-	    'env': {
+        'display_name': 'Workshop Environment',
+        'default': True,
+        'kubespawner_override': {
+            'env': {
                 'DEFAULT_PAGE': 'dashboard'
-	    }
-	}
+            }
+        }
     },
     {
-	'display_name': 'Interactive Terminal Only',
-	'kubespawner_override': {
-	    'env': {
+        'display_name': 'Interactive Terminal Only',
+        'kubespawner_override': {
+            'env': {
                 'DEFAULT_PAGE': 'terminal'
-	    }
-	}
+            }
+        }
     },
     {
-	'display_name': 'Workshop Content Only',
-	'kubespawner_override': {
-	    'env': {
+        'display_name': 'Workshop Content Only',
+        'kubespawner_override': {
+            'env': {
                 'DEFAULT_PAGE': 'workshop'
-	    }
-	}
+            }
+        }
     }
 ]
 

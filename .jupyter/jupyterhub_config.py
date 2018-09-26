@@ -197,4 +197,4 @@ profile_list = [
 if not os.environ.get('DEFAULT_PAGE'):
     c.KubeSpawner.profile_list = profile_list
 else:
-    c.Spawner.environment.update('DEFAULT_PAGE', os.environ['DEFAULT_PAGE'])
+    c.Spawner.environment = dict(DEFAULT_PAGE=os.environ['DEFAULT_PAGE'])

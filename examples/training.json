@@ -19,6 +19,10 @@
             "required": true
         },
         {
+            "name": "DEFAULT_PAGE",
+            "value": ""
+        },
+        {
             "name": "MEMORY_SIZE",
             "value": "512Mi"
         },
@@ -252,6 +256,10 @@
                                         "value": "${APPLICATION_NAME}"
                                     },
                                     {
+                                        "name": "DEFAULT_PAGE",
+                                        "value": "${DEFAULT_PAGE}"
+                                    },
+                                    {
                                         "name": "MEMORY_SIZE",
                                         "value": "${MEMORY_SIZE}"
                                     },
@@ -268,43 +276,43 @@
                                         "value": "${IDLE_TIMEOUT}"
                                     }
                                 ],
-				"volumeMounts": [
-				    {
-					"mountPath": "/opt/app-root/data",
-					"name": "data"
-				    }
-				]
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/opt/app-root/data",
+                                        "name": "data"
+                                    }
+                                ]
                             }
                         ],
-			"volumes": [
-			    {
-				"name": "data",
-				"persistentVolumeClaim": {
-				    "claimName": "${APPLICATION_NAME}-hub-data"
-				}
-			    }
-			]
+                        "volumes": [
+                            {
+                                "name": "data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "${APPLICATION_NAME}-hub-data"
+                                }
+                            }
+                        ]
                     }
                 }
             }
         },
-	{
-	    "apiVersion": "v1",
-	    "kind": "PersistentVolumeClaim",
-	    "metadata": {
-		"name": "${APPLICATION_NAME}-hub-data"
-	    },
-	    "spec": {
-		"accessModes": [
-		    "ReadWriteOnce"
-		],
-		"resources": {
-		    "requests": {
-			"storage": "1Gi"
-		    }
-		}
-	    }
-	},
+        {
+            "apiVersion": "v1",
+            "kind": "PersistentVolumeClaim",
+            "metadata": {
+                "name": "${APPLICATION_NAME}-hub-data"
+            },
+            "spec": {
+                "accessModes": [
+                    "ReadWriteOnce"
+                ],
+                "resources": {
+                    "requests": {
+                        "storage": "1Gi"
+                    }
+                }
+            }
+        },
         {
             "kind": "Service",
             "apiVersion": "v1",

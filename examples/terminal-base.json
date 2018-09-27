@@ -115,7 +115,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/jupyter-on-openshift/jupyterhub-quickstart.git"
+                        "uri": "https://github.com/jupyter-on-openshift/jupyterhub-quickstart.git",
+                        "ref": "1.0.4"
                     }
                 },
                 "strategy": {
@@ -171,7 +172,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-evangelists/training-openshift-auth.git"
+                        "uri": "https://github.com/openshift-evangelists/training-openshift-auth.git",
+                        "ref": "master"
                     }
                 },
                 "strategy": {
@@ -402,7 +404,8 @@
                 "source": {
                     "type": "Git",
                     "git": {
-                        "uri": "https://github.com/openshift-evangelists/workshop-base-image.git"
+                        "uri": "https://github.com/openshift-evangelists/workshop-base-image.git",
+                        "ref": "master"
                     }
                 },
                 "strategy": {

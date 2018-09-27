@@ -19,7 +19,7 @@ with open(os.path.join(service_account_path, 'namespace')) as fp:
 
 c.KubeSpawner.hub_connect_ip = application_name
 
-user_image_name = os.environ('USER_IMAGE_NAME')
+user_image_name = os.environ.get('USER_IMAGE_NAME')
 
 if user_image_name:
     c.KubeSpawner.singleuser_image_spec = (

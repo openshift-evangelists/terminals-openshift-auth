@@ -173,7 +173,7 @@
                     "type": "Git",
                     "git": {
                         "uri": "https://github.com/openshift-evangelists/training-openshift-auth.git",
-                        "ref": "master"
+                        "ref": "1.0.0"
                     }
                 },
                 "strategy": {
@@ -405,7 +405,7 @@
                     "type": "Git",
                     "git": {
                         "uri": "https://github.com/openshift-evangelists/workshop-base-image.git",
-                        "ref": "master"
+                        "ref": "1.0.0"
                     }
                 },
                 "strategy": {

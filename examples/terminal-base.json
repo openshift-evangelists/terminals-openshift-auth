@@ -116,7 +116,7 @@
                     "type": "Git",
                     "git": {
                         "uri": "https://github.com/jupyter-on-openshift/jupyterhub-quickstart.git",
-                        "ref": "1.0.4"
+                        "ref": "2.0.0"
                     }
                 },
                 "strategy": {
@@ -173,7 +173,7 @@
                     "type": "Git",
                     "git": {
                         "uri": "https://github.com/openshift-evangelists/training-openshift-auth.git",
-                        "ref": "1.0.0"
+                        "ref": "2.0.0"
                     }
                 },
                 "strategy": {

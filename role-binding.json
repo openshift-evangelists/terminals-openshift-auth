@@ -1,0 +1,46 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "role-binding"
+    },
+    "parameters": [
+        {
+            "name": "MASTER_NAME",
+            "value": "",
+            "required": true
+        },
+        {
+            "name": "ACCOUNT_NAME",
+            "value": "",
+            "required": true
+        },
+        {
+            "name": "USER_ROLE",
+            "value": "edit",
+            "required": true
+        }
+    ],
+    "objects": [
+	{
+	    "kind": "RoleBinding",
+	    "apiVersion": "v1",
+	    "metadata": {
+		"name": "${ACCOUNT_NAME}-${USER_ROLE}"
+	    },
+	    "userNames": [
+		"system:serviceaccount:${MASTER_NAME}:${ACCOUNT_NAME}"
+	    ],
+	    "subjects": [
+		{
+		    "kind": "ServiceAccount",
+		    "namespace": "${MASTER_NAME}",
+		    "name": "${ACCOUNT_NAME}"
+		}
+	    ],
+	    "roleRef": {
+		"name": "${USER_ROLE}"
+	    }
+	}
+    ]
+}

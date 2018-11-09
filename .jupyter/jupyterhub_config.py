@@ -17,16 +17,14 @@ service_account_path = '/var/run/secrets/kubernetes.io/serviceaccount'
 with open(os.path.join(service_account_path, 'namespace')) as fp:
     namespace = fp.read().strip()
 
-c.KubeSpawner.hub_connect_ip = application_name
-
 user_image_name = os.environ.get('USER_IMAGE_NAME')
 
 if user_image_name:
-    c.KubeSpawner.singleuser_image_spec = (
+    c.KubeSpawner.image = (
             'docker-registry.default.svc:5000/%s/%s:latest' %
             (namespace, user_image_name))
 else:
-    c.KubeSpawner.singleuser_image_spec = (
+    c.KubeSpawner.image = (
             'docker-registry.default.svc:5000/%s/%s-app-labs:latest' %
             (namespace, application_name))
 
@@ -34,8 +32,6 @@ c.KubeSpawner.cmd = ['/usr/libexec/s2i/run']
 
 c.KubeSpawner.pod_name_template = '%s-user-{username}' % (
         c.KubeSpawner.hub_connect_ip)
-
-c.KubeSpawner.common_labels = { 'app': application_name }
 
 c.Spawner.mem_limit = convert_size_to_bytes(os.environ['MEMORY_SIZE'])
 

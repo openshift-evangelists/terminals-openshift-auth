@@ -1,0 +1,72 @@
+oc process -f project-request.json --param PROJECT_NAME=ws1 | oc create -f -
+
+$ oc describe project ws1
+Name:		ws1
+Created:	40 seconds ago
+Labels:		<none>
+Annotations:	openshift.io/description=
+		openshift.io/display-name=
+		openshift.io/requester=opentlc-mgr
+		openshift.io/sa.scc.mcs=s0:c16,c15
+		openshift.io/sa.scc.supplemental-groups=1000270000/10000
+		openshift.io/sa.scc.uid-range=1000270000/10000
+Display Name:	<none>
+Description:	<none>
+Status:		Active
+Node Selector:	<none>
+Quota:		<none>
+Resource limits:
+	Name:		ws1-core-resource-limits
+	Type		Resource	Min	Max	Default	Limit	Limit/Request
+	----		--------	---	---	---	-----	-------------
+	Container	memory		10Mi	6Gi	1536Mi	1536Mi	-
+	Container	cpu		-	-	500m	500m	-
+	Pod		memory		6Mi	12Gi	-	-	-
+
+$ oc get rolebindings -n ws1
+NAME                    ROLE                    USERS         GROUPS                       SERVICE ACCOUNTS   SUBJECTS
+admin                   /admin                  opentlc-mgr
+system:deployers        /system:deployer                                                   deployer
+system:image-builders   /system:image-builder                                              builder
+system:image-pullers    /system:image-puller                  system:serviceaccounts:ws1
+
+$ oc process -f service-account.json --param ACCOUNT_NAME=sa1 | oc create -f -
+
+$ oc process -f role-binding.json --param MASTER_NAME=hub --param ACCOUNT_NAME=sa1 | oc create -f -
+
+$ sh fetch.sh
+{
+  "kind": "ProjectList",
+  "apiVersion": "project.openshift.io/v1",
+  "metadata": {
+    "selfLink": "/apis/project.openshift.io/v1/projects"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "hub",
+        "selfLink": "/apis/project.openshift.io/v1/projects/hub",
+        "uid": "8e9395d3-d68a-11e8-877a-12d614323766",
+        "resourceVersion": "1075930",
+        "creationTimestamp": "2018-10-23T06:12:02Z",
+        "annotations": {
+          "openshift.io/description": "",
+          "openshift.io/display-name": "",
+          "openshift.io/requester": "opentlc-mgr",
+          "openshift.io/sa.scc.mcs": "s0:c16,c10",
+          "openshift.io/sa.scc.supplemental-groups": "1000260000/10000",
+          "openshift.io/sa.scc.uid-range": "1000260000/10000"
+        }
+      },
+      "spec": {
+        "finalizers": [
+          "openshift.io/origin",
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    }
+  ]
+}

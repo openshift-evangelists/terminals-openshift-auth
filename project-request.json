@@ -1,0 +1,23 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "project-request"
+    },
+    "parameters": [
+        {
+            "name": "PROJECT_NAME",
+            "value": "",
+            "required": true
+        }
+    ],
+    "objects": [
+	{
+	    "kind": "ProjectRequest",
+	    "apiVersion": "project.openshift.io/v1",
+	    "metadata": {
+		"name": "${PROJECT_NAME}"
+	    }
+	}
+    ]
+}
